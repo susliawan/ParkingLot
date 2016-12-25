@@ -35,6 +35,7 @@ public class ParkingLot {
 	}
 	
 	/**
+	 * Add car
 	 * @param Car c
 	 * @return Integer index if car successfully added to lots
 	 * 		   Null if parking lot is already full
@@ -49,6 +50,7 @@ public class ParkingLot {
 	}
 	
 	/**
+	 * Remove car
 	 * @param Integer index
 	 * @return Integer slot's index if car successfully removed from lots
 	 * 		   Null if there is no car at the particular lot or index greater than N
@@ -67,6 +69,7 @@ public class ParkingLot {
 	}
 	
 	/**
+	 * Status
 	 * @return String of parking lot's status 
 	 */
 	public String status(){
@@ -79,4 +82,50 @@ public class ParkingLot {
 		return status;
 	}
 	
+	/**
+	 * Find Slot Number by Reg No
+	 * @param regNo
+	 * @return list of slots number
+	 */
+	public ArrayList<Integer> findSlotNumberbyRegNo(String regNo){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for(int i = 0; i < lots.size(); ++i){
+			Car c = lots.get(i);
+			String carRegNo = c.registrationNo().replaceAll("-", "");
+			regNo = regNo.replaceAll("-", "");
+			if(c != null && carRegNo.equalsIgnoreCase(regNo))
+				result.add(i+1);
+		}
+		return result;
+	}
+	
+	/**
+	 * Find Slot Number By Colour
+	 * @param colour
+	 * @return list of slots number
+	 */
+	public ArrayList<Integer> findSlotNumberbyColour(String colour){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for(int i = 0; i < lots.size(); ++i){
+			Car c = lots.get(i);
+			if(c != null && c.colour().equalsIgnoreCase(colour))
+				result.add(i+1);
+		}
+		return result;
+	}
+	
+	/**
+	 * Find Reg Number By Colour
+	 * @param colour
+	 * @return list of reg number
+	 */
+	public ArrayList<String> findRegNumberbyColour(String colour){
+		ArrayList<String> result = new ArrayList<String>();
+		for(int i = 0; i < lots.size(); ++i){
+			Car c = lots.get(i);
+			if(c != null && c.colour().equalsIgnoreCase(colour))
+				result.add(c.registrationNo());
+		}
+		return result;
+	}
 }
